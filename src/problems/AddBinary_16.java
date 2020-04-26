@@ -32,7 +32,7 @@ public class AddBinary_16 {
     if (n < m) {
       return addBinaryWithPlusOperator(b, a);
     }
-    int L = n;
+    int L = Math.max(n, m);
 
     int carry = 0;
     int j = m - 1;
@@ -56,7 +56,7 @@ public class AddBinary_16 {
       j--;
     }
 
-    if(carry == 1) {
+    if (carry == 1) {
       sb.append('1');
     }
     return sb.reverse().toString();
