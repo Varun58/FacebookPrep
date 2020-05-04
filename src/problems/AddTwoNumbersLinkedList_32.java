@@ -65,11 +65,11 @@ public class AddTwoNumbersLinkedList_32 {
       }
 
       dummy.val = sum % 10;
-      int carry = sum / 10;
 
-      ListNode listNode = new ListNode(carry);
-      listNode.next = dummy;
-      dummy = listNode;
+      int carry = sum / 10;
+      ListNode newNode = new ListNode(carry);
+      newNode.next = dummy;
+      dummy = newNode;
 
       sum = carry;
     }

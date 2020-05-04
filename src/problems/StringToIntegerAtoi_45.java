@@ -7,43 +7,28 @@ public class StringToIntegerAtoi_45 {
   }
 
   public int myAtoi(String str) {
-    if(str == null || str.length() == 0) {
-      return 0;
-    }
-
-    str = str.trim();
-    if(str.length() == 0) {
-      return 0;
-    }
-
-    char flag = '+';
     int i = 0;
+    str = str.trim();
+    char[] c = str.toCharArray();
 
-    if(str.charAt(0) == '-') {
-      flag = '-';
-      i++;
-    } else if(str.charAt(0) == '+') {
-      i++;
-    }
-
-    double result = 0;
-    while(i < str.length() && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
-      result = result * 10 + (str.charAt(i) - '0');
+    int sign = 1;
+    if (i < c.length && (c[i] == '-' || c[i] == '+')) {
+      if (c[i] == '-') {
+        sign = -1;
+      }
       i++;
     }
 
-    if(flag== '-') {
-      result = -result;
+    int num = 0;
+    int bound = Integer.MAX_VALUE / 10;
+    while (i < c.length && c[i] >= '0' && c[i] <= '9') {
+      int digit = c[i] - '0';
+      if (num > bound || (num == bound && digit > 7)) {
+        return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+      }
+      num = num * 10 + digit;
+      i++;
     }
-
-    if(result < Integer.MIN_VALUE) {
-      return Integer.MIN_VALUE;
-    }
-
-    if(result > Integer.MAX_VALUE) {
-      return Integer.MAX_VALUE;
-    }
-
-    return  (int) result;
+    return sign * num;
   }
 }
